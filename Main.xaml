@@ -29,7 +29,7 @@
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
-    <scg:List x:TypeArguments="AssemblyReference" Capacity="38">
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="22">
       <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
       <AssemblyReference>mscorlib</AssemblyReference>
@@ -51,6 +51,7 @@
       <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
       <AssemblyReference>System.ServiceModel</AssemblyReference>
       <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>UiPath.Python</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
   <Flowchart DisplayName="INDEX_FC" sap:VirtualizedContainerService.HintSize="634,636" sap2010:WorkflowViewState.IdRef="Flowchart_1">
@@ -652,14 +653,16 @@
         <x:Reference>__ReferenceID3</x:Reference>
         <x:Reference>__ReferenceID4</x:Reference>
         <x:Reference>__ReferenceID5</x:Reference>
-        <State x:Name="__ReferenceID6" DisplayName="GetConfig" sap:VirtualizedContainerService.HintSize="134,61" sap2010:WorkflowViewState.IdRef="State_7">
+        <State x:Name="__ReferenceID6" DisplayName="GetConfig" sap:VirtualizedContainerService.HintSize="484,1170" sap2010:WorkflowViewState.IdRef="State_7">
           <State.Entry>
-            <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="438,551" sap2010:WorkflowViewState.IdRef="TryCatch_6">
+            <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="438,783" sap2010:WorkflowViewState.IdRef="TryCatch_6">
               <TryCatch.Try>
-                <Sequence DisplayName="SQ_GETCONFIG" sap:VirtualizedContainerService.HintSize="376,324" sap2010:WorkflowViewState.IdRef="Sequence_13">
+                <Sequence DisplayName="SQ_GETCONFIG" sap:VirtualizedContainerService.HintSize="376,556" sap2010:WorkflowViewState.IdRef="Sequence_13">
                   <Sequence.Variables>
                     <Variable x:TypeArguments="x:String" Name="config" />
                     <Variable x:TypeArguments="njl:JObject" Name="configJson" />
+                    <Variable x:TypeArguments="ui:GenericValue" Name="sa" />
+                    <Variable x:TypeArguments="x:String" Name="pathworkspace" />
                   </Sequence.Variables>
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -668,6 +671,19 @@
                   </sap:WorkflowViewStateService.ViewState>
                   <ui:ReadTextFile Content="[config]" DisplayName="Read Text File" FileName="config\conf.json" sap:VirtualizedContainerService.HintSize="334,132" sap2010:WorkflowViewState.IdRef="ReadTextFile_1" />
                   <ui:DeserializeJson x:TypeArguments="njl:JObject" DisplayName="Deserialize JSON" sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="DeserializeJson`1_1" JsonObject="[cg]" JsonString="[config]" />
+                  <ui:InputDialog Options="{x:Null}" DisplayName="Input Dialog" sap:VirtualizedContainerService.HintSize="334,92" sap2010:WorkflowViewState.IdRef="InputDialog_1" IsPassword="False" Label="-----°-------" Title="Ingrese path workspace">
+                    <ui:InputDialog.Result>
+                      <OutArgument x:TypeArguments="x:String">[pathworkspace]</OutArgument>
+                    </ui:InputDialog.Result>
+                  </ui:InputDialog>
+                  <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_10">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="njl:JToken">[cg("workspace2")]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="njl:JToken">[pathworkspace]</InArgument>
+                    </Assign.Value>
+                  </Assign>
                 </Sequence>
               </TryCatch.Try>
               <TryCatch.Catches>
@@ -714,7 +730,9 @@
               <Transition.To>
                 <x:Reference>__ReferenceID0</x:Reference>
               </Transition.To>
-              <Transition.Condition>[SytemErrorGetConfig IsNot Nothing]</Transition.Condition>
+              <Transition.Condition>
+                <mva:VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="SytemErrorGetConfig IsNot Nothing" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_1" />
+              </Transition.Condition>
             </Transition>
             <Transition DisplayName="Success" sap:VirtualizedContainerService.HintSize="450,505" sap2010:WorkflowViewState.IdRef="Transition_11">
               <sap:WorkflowViewStateService.ViewState>
