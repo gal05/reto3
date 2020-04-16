@@ -173,7 +173,7 @@
                 <mva:VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="SystemErrorOpenBrowser is Nothing" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_3" />
               </Transition.Condition>
               <Transition.To>
-                <State x:Name="__ReferenceID6" DisplayName="GetConfig" sap:VirtualizedContainerService.HintSize="484,938" sap2010:WorkflowViewState.IdRef="State_7">
+                <State x:Name="__ReferenceID6" DisplayName="GetConfig" sap:VirtualizedContainerService.HintSize="134,61" sap2010:WorkflowViewState.IdRef="State_7">
                   <State.Entry>
                     <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="438,551" sap2010:WorkflowViewState.IdRef="TryCatch_6">
                       <TryCatch.Try>
@@ -620,15 +620,18 @@
                                               </sap:WorkflowViewStateService.ViewState>
                                               <Transition.Condition>[SystemErrorValidate is Nothing and continuar]</Transition.Condition>
                                               <Transition.To>
-                                                <State x:Name="__ReferenceID3" DisplayName="FS_SUCCESS" sap:VirtualizedContainerService.HintSize="134,61" sap2010:WorkflowViewState.IdRef="State_4" IsFinal="True">
+                                                <State x:Name="__ReferenceID3" DisplayName="FS_SUCCESS" sap:VirtualizedContainerService.HintSize="422,628" sap2010:WorkflowViewState.IdRef="State_4" IsFinal="True">
                                                   <State.Entry>
-                                                    <Sequence DisplayName="SQ_SUCCES_FINAL" sap:VirtualizedContainerService.HintSize="376,198" sap2010:WorkflowViewState.IdRef="Sequence_11">
+                                                    <Sequence DisplayName="SQ_SUCCES_FINAL" sap:VirtualizedContainerService.HintSize="376,515" sap2010:WorkflowViewState.IdRef="Sequence_11">
+                                                      <Sequence.Variables>
+                                                        <Variable x:TypeArguments="ui:Image" Name="img" />
+                                                      </Sequence.Variables>
                                                       <sap:WorkflowViewStateService.ViewState>
                                                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                                         </scg:Dictionary>
                                                       </sap:WorkflowViewStateService.ViewState>
-                                                      <ui:TakeScreenshot Screenshot="{x:Null}" WaitBefore="{x:Null}" DisplayName="Take Screenshot 'DIV  conten1'" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="TakeScreenshot_1">
+                                                      <ui:TakeScreenshot WaitBefore="{x:Null}" DisplayName="Take Screenshot 'DIV  conten1'" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="TakeScreenshot_1" Screenshot="[img]">
                                                         <ui:TakeScreenshot.Target>
                                                           <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="e22db18588fb2d01a4e311cd7fe0c0cb" Selector="&lt;html app='chrome.exe' title='Test documentos y registros' /&gt;&lt;webctrl id='conten1' tag='DIV' /&gt;">
                                                             <ui:Target.TimeoutMS>
@@ -640,6 +643,14 @@
                                                           </ui:Target>
                                                         </ui:TakeScreenshot.Target>
                                                       </ui:TakeScreenshot>
+                                                      <ui:SaveImage DisplayName="Save Image" FileName="[cg(&quot;workspace2&quot;).ToString+&quot;\img\resultado.jpg&quot;]" sap:VirtualizedContainerService.HintSize="334,92" sap2010:WorkflowViewState.IdRef="SaveImage_2" Image="[img]" />
+                                                      <ui:SendOutlookMail Account="{x:Null}" Bcc="{x:Null}" Cc="{x:Null}" MailMessage="{x:Null}" TimeoutMS="{x:Null}" Body="imgen adjunta" DisplayName="Send Outlook Mail Message" sap:VirtualizedContainerService.HintSize="334,145" sap2010:WorkflowViewState.IdRef="SendOutlookMail_1" IsBodyHtml="False" IsDraft="False" Subject="resultado" To="jguerrag@canvia.com">
+                                                        <ui:SendOutlookMail.Files>
+                                                          <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4">
+                                                            <InArgument x:TypeArguments="x:String">[cg("workspace2").ToString+"\img\resultado.jpg"]</InArgument>
+                                                          </scg:List>
+                                                        </ui:SendOutlookMail.Files>
+                                                      </ui:SendOutlookMail>
                                                     </Sequence>
                                                   </State.Entry>
                                                   <sap:WorkflowViewStateService.ViewState>
