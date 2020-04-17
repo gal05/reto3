@@ -553,7 +553,9 @@
                                           </ui:BrowserScope.Body>
                                         </ui:BrowserScope>
                                       </Transition.Action>
-                                      <Transition.Condition>[SystemErrorValidate is Nothing And continuar=false]</Transition.Condition>
+                                      <Transition.Condition>
+                                        <mva:VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="SystemErrorValidate is Nothing And continuar=false" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_2" />
+                                      </Transition.Condition>
                                     </Transition>
                                     <Transition DisplayName="Success" sap:VirtualizedContainerService.HintSize="450,505" sap2010:WorkflowViewState.IdRef="Transition_9">
                                       <sap:WorkflowViewStateService.ViewState>
@@ -563,7 +565,9 @@
                                           <x:Int32 x:Key="DestConnectionPointIndex">31</x:Int32>
                                         </scg:Dictionary>
                                       </sap:WorkflowViewStateService.ViewState>
-                                      <Transition.Condition>[SystemErrorValidate is Nothing and continuar]</Transition.Condition>
+                                      <Transition.Condition>
+                                        <mva:VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="SystemErrorValidate is Nothing and continuar" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_3" />
+                                      </Transition.Condition>
                                       <Transition.To>
                                         <State x:Name="__ReferenceID3" DisplayName="FS_SUCCESS" sap:VirtualizedContainerService.HintSize="134,61" sap2010:WorkflowViewState.IdRef="State_4" IsFinal="True">
                                           <State.Entry>
